@@ -43,8 +43,8 @@ public class SecrureTasksApplication implements CommandLineRunner {
 			// aprés ->{ } on écrit ce qu'on veut faire
 			System.out.println(t.toString());
 			
-			accountService.saveUser(new AppUser("admin", "1234",1));
-			accountService.saveUser(new AppUser("user", "1234",1));
+			accountService.saveUser(new AppUser("admin", "myadmin",1));
+			accountService.saveUser(new AppUser("user", "user",1));
 			accountService.saveRole(new AppRole("ADMIN"));
 			accountService.saveRole(new AppRole("USER"));
 			accountService.addRoleToUser("admin", "ADMIN");
