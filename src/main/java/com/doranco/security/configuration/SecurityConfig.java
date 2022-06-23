@@ -2,6 +2,7 @@ package com.doranco.security.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,11 +14,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("USER", "ADMIN");
-		auth.inMemoryAuthentication().withUser(" user").password("{noop}1234 ").roles(" USER");
+		auth.inMemoryAuthentication().withUser("user").password("{noop}1234 ").roles("USER");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
+		http.formLogin();
+		http.csrf().disable();
+		http.authorizeRequests().antMatchers("/login/**","register/**").permitAll();
+		//login et register sont autorisé pour tout le monde
+		http.authorizeRequests().antMatchers(HttpMethod.POST,"/task/**").hasRole("ADMIN"); //antMatcher=> url et methode =?
+		http.authorizeRequests().anyRequest().authenticated();
+		// anyRequest=> n'importe quelle user peut accéder .authentificated (il doit se connecter avant tout)
+		
 	}
 }
