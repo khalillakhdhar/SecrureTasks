@@ -11,9 +11,9 @@ import javax.persistence.ManyToMany;
 @Entity
 public class AppUser implements Serializable {
 	@Id
-	private String username;
+	private String username; // principle
 	private String password;
-	private int active;
+	private int active; // credential
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<AppRole> roles=new ArrayList<>();
 	public String getUsername() {

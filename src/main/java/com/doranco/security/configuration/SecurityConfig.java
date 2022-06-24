@@ -36,11 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.formLogin();
+		//afficher un formulaire de login
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/login/**", "register/**").permitAll();
+		// ne pas autorisé les testes (yarc postman)
+		http.authorizeRequests().antMatchers("/login/**", "/register/**").permitAll(); // pages autorisé mm si vous n'êtes pas connecté
 		// login et register sont autorisé pour tout le monde
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/task/**").hasRole("ADMIN"); // antMatcher=> url et
 																							// methode =?
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/task").hasRole("ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();
 		// anyRequest=> n'importe quelle user peut accéder .authentificated (il doit se
 		// connecter avant tout)

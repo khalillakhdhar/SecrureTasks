@@ -28,6 +28,11 @@ public Task addOne(@RequestBody @Valid Task task)
 return taskService.addTask(task);	
 
 }
+@GetMapping("")
+public String welcomePage()
+{
+return "<h2>Bienvenu</h2><a href='/task'>voir les taches</a>";	
+}
 
 
 

@@ -26,6 +26,7 @@ public class SecrureTasksApplication implements CommandLineRunner {
 	}
 
 	@Bean
+	//preservation de grain de sel
 	public BCryptPasswordEncoder getBCPE()
 	{
 	return new BCryptPasswordEncoder();	
@@ -44,7 +45,7 @@ public class SecrureTasksApplication implements CommandLineRunner {
 			System.out.println(t.toString());
 			
 			accountService.saveUser(new AppUser("admin", "myadmin",1));
-			accountService.saveUser(new AppUser("user", "user",1));
+			accountService.saveUser(new AppUser("user", "user",0));
 			accountService.saveRole(new AppRole("ADMIN"));
 			accountService.saveRole(new AppRole("USER"));
 			accountService.addRoleToUser("admin", "ADMIN");
