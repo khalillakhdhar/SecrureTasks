@@ -13,6 +13,7 @@ import com.doranco.security.model.AppUser;
 
 @Service
 @Transactional
+
 public class AccountServiceImpl implements AccountService {
 	private	BCryptPasswordEncoder	bCryptPasswordEncoder;
 
